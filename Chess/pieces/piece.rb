@@ -13,7 +13,7 @@ class Piece
 
   def valid_moves
     valid_moves = []
-    
+
     moves.each do |move|
       dup = @board.dup
       dup.move_piece(@pos, move)

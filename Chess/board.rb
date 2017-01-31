@@ -33,9 +33,9 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise ArgumentError unless in_bounds?(start_pos) && in_bounds?(end_pos)
     piece = self[start_pos]
-    raise TypeError if piece.nil?
+    raise TypeError if piece.type.nil?
+    raise ArgumentError unless self[start_pos].valid_moves.include?(end_pos)
     self[end_pos] = piece
     self[start_pos] = nil
   end
