@@ -52,10 +52,11 @@ class Pawn < Piece
     !@board[new_pos].color.nil?
   end
 
-  def adjust_pos(pos)
+  def adjust_pos(delta)
+    # byebug
     new_pos = @pos.dup
-    new_pos[0] += pos[0]
-    new_pos[1] += pos[1]
+    new_pos[0] += delta[0]
+    new_pos[1] += delta[1]
     new_pos
   end
 

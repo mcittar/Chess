@@ -10,21 +10,19 @@ class Display
   end
 
   def render
-    while true
-      system('clear')
-      p @cursor.cursor_pos
-      @board.grid.each_with_index do |row, r_idx|
-        row.each_with_index do |col, c_idx|
-          if [r_idx, c_idx] == @cursor.cursor_pos
-            print print_space([r_idx, c_idx]).colorize(:white).on_red.blink
-          else
-            print print_space([r_idx, c_idx])
-          end
+    system('clear')
+    p @cursor.cursor_pos
+    @board.grid.each_with_index do |row, r_idx|
+      row.each_with_index do |col, c_idx|
+        if [r_idx, c_idx] == @cursor.cursor_pos
+          print print_space([r_idx, c_idx]).colorize(:white).on_red.blink
+        else
+          print print_space([r_idx, c_idx])
         end
-        print "\n"
       end
-      @cursor.get_input
+      print "\n"
     end
+    @cursor.get_input
   end
 
   def print_space(pos)

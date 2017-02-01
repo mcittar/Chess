@@ -33,11 +33,13 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
+    # byebug
     piece = self[start_pos]
     raise TypeError if piece.type.nil?
-    raise ArgumentError unless self[start_pos].valid_moves.include?(end_pos)
+    raise ArgumentError unless self[start_pos].moves.include?(end_pos)
     self[end_pos] = piece
-    self[start_pos] = nil
+    self[start_pos] = NullPiece.instance
+    true
   end
 
   def in_check?(color)
@@ -50,9 +52,9 @@ class Board
         enemy_pieces << piece if p_color != color && !p_color.nil?
       end
     end
-
+    # byebug
     enemy_pieces.each do |enemy|
-      true if enemy.moves.include?(king_pos)
+      return true if enemy.moves.include?(king_pos)
     end
 
     false
@@ -132,7 +134,8 @@ class Board
   def dup
     Marshal.load(Marshal.dump(self))
   end
-end
 
+end
 b = Board.new
-d = b.dup
+# b.move_piece([6,5],[5,5])
+# b.move_piece([7,1],[5,0])
